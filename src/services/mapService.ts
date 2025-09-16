@@ -1,4 +1,4 @@
-const baseUrl = "http://api.openweathermap.org"
+const baseUrl = "https://api.openweathermap.org"
 const openWeatherMapApiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY
 
 function getGeocoding(query: string) {
