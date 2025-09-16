@@ -64,7 +64,7 @@ The build output will be in the dist/ folder.
 - [OpenWeatherMap API](https://openweathermap.org/api) – Geocoding and Air Pollution API.
 - [Leaflet](https://react-leaflet.js.org/docs/) – Interactive map
 - [React](https://reactjs.org/) – Frontend library.
-- [Material-UI](https://mui.com/material-ui) – UI component library for React.
+- [React Redux](https://react-redux.js.org/) – State management library for React.- [Material-UI](https://mui.com/material-ui) – UI component library for React.
 - [notistack](https://iamhosseindhv.com/notistack) – Snackbar notifications for React.
 - [Iconify](https://iconify.design/) – Icon library and framework.
 - [Vite](https://vitejs.dev/) – Development and build tool.
