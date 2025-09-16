@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 60px;
+}
+
+.outlet {
+  flex: 1;
+  overflow: hidden;
+}

@@ -1,0 +1,36 @@
+:root {
+  --webWhite: #FFFFFF;
+  --webBlack: #000000;
+  --webLightBlue: #69cce6;
+  --webBlue: #0085ca;
+  --webGrey: #97999b;
+  --webSuccess: #01A982;
+  --webError: #b00020;
+  font-size: 1rem;
+  font-family: Poppins, sans-serif;
+  background-color: var(--webWhite);
+}
+
+body {
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--webGrey);
+  border-radius: 18px;
+}
