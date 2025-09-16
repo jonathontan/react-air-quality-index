@@ -4,6 +4,9 @@ A web application to display AQI (Air Quality Index) and weather information usi
 
 It allows users to search for a city and displays its current AQI with clear indicators and pollutant info.
 
+This project is deployed and accessible online at:  
+[https://jonathon-aqi.onrender.com/](https://jonathon-aqi.onrender.com/)
+
 ## Prerequisites
 
 Before running this project, make sure you have:
@@ -17,7 +20,7 @@ Before running this project, make sure you have:
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/jonathontan/react-air-quality-index.git
 cd your-repo
 ```
 
