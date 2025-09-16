@@ -8,7 +8,6 @@ function getGeocoding(query: string) {
 
   return fetch(requestUrl, {
     method: "GET",
-    headers: { "Content-Type": "application/json" }
   })
 }
 
@@ -19,7 +18,6 @@ function getAirPollution(coordinates: [number, number]) {
 
   return fetch(requestUrl, {
     method: "GET",
-    headers: { "Content-Type": "application/json" }
   })
 }
 
