@@ -4,11 +4,13 @@ import constants from "../constants";
 interface UISliceState {
   mobileBreakpoint: boolean
   tabletBreakpoint: boolean
+  isLoading: boolean
 }
 
 const uiInitialState: UISliceState = {
   mobileBreakpoint: false,
   tabletBreakpoint: false,
+  isLoading: false
 }
 
 const uiSlice = createSlice({
@@ -20,6 +22,9 @@ const uiSlice = createSlice({
     },
     setTabletBreakpoint: (state, action) => {
       state.tabletBreakpoint = action.payload
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload
     }
   }
 })
