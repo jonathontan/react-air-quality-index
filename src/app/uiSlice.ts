@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import constants from "../constants";
 
 interface UISliceState {
   mobileBreakpoint: boolean
