@@ -165,6 +165,15 @@ function Map() {
             <AccordionDetails sx={{
               padding: '0 2rem 0 1rem !important'
             }}>
+              <Typography margin="0 !important">
+                {weather?.description
+                  ? weather.description
+                    .split(" ")
+                    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                    .join(" ")
+                  : ""
+                }
+              </Typography>
               <dl className={styles.detailsList}>
                 {temperature && Object.entries(temperature).map(([k, v], index) => {
                   const label = constants.weatherLabels[k]
