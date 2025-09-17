@@ -33,7 +33,7 @@ function Map() {
   const geocoding = useAppSelector(state => state.map.geocoding)
   const airPollution = useAppSelector(state => state.map.airPollution)
   const currentWeather = useAppSelector(state => state.map.currentWeather)
-  const [expanded, setExpanded] = useState<string | false>("")
+  const [expanded, setExpanded] = useState<string | false>("aqi")
 
   useEffect(() => {
     if (markerRef.current)
@@ -76,7 +76,6 @@ function Map() {
         <h2>{city}</h2>
         <div className={styles.accordion}>
           <Accordion
-            defaultExpanded
             expanded={expanded === "aqi"}
             onChange={handleExpandedChange("aqi")}
             sx={{
