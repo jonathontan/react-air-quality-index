@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import { IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchAirPollution, fetchCurrentWeather, fetchGeocoding, mapActions } from "../app/mapSlice";
 import colors from "../styles/colors";
 import styles from "./Navbar.module.css";
@@ -13,6 +13,7 @@ function Navbar() {
   const { enqueueSnackbar } = useSnackbar();
   const [searchCity, setSearchCity] = useState<string>("")
   const [hasError, setHasError] = useState<boolean>(false)
+  const isMobilebreakpoint = useAppSelector(state => state.ui.mobileBreakpoint)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const text = e.currentTarget.value
@@ -87,6 +88,7 @@ function Navbar() {
         }}
         sx={{
           '.MuiOutlinedInput-root': {
+            width: isMobilebreakpoint ? 200 : 300,
             color: colors.white,
             borderRadius: 30,
             '& fieldset': {

@@ -76,6 +76,7 @@ function Map() {
         <h2>{city}</h2>
         <div className={styles.accordion}>
           <Accordion
+            defaultExpanded
             expanded={expanded === "aqi"}
             onChange={handleExpandedChange("aqi")}
             sx={{
