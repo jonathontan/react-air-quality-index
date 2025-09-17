@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import constants from "../constants";
 import { FetchStatus } from "../enum/enums";
-import { AirPollution, Geocoding } from "../interfaces/map";
+import { AirPollution, Geocoding, CurrentWeather } from "../interfaces/map";
 import mapService from "../services/mapService";
 
 interface MapSliceState {
@@ -10,6 +10,7 @@ interface MapSliceState {
   marker: [number, number] | undefined
   geocoding: Geocoding[] | undefined
   airPollution: AirPollution | undefined
+  currentWeather: CurrentWeather | undefined
   fetchStatus: FetchStatus
 }
 
@@ -19,6 +20,7 @@ const MapInitialState: MapSliceState = {
   marker: undefined,
   geocoding: undefined,
   airPollution: undefined,
+  currentWeather: undefined,
   fetchStatus: FetchStatus.IDLE
 }
 
@@ -58,6 +60,16 @@ const mapSlice = createSlice({
       .addCase(fetchAirPollution.rejected, (state) => {
         state.fetchStatus = FetchStatus.FAILED
       })
+      .addCase(fetchCurrentWeather.pending, (state) => {
+        state.fetchStatus = FetchStatus.LOADING
+      })
+      .addCase(fetchCurrentWeather.fulfilled, (state, action) => {
+        state.fetchStatus = FetchStatus.COMPLETED
+        state.currentWeather = action.payload
+      })
+      .addCase(fetchCurrentWeather.rejected, (state) => {
+        state.fetchStatus = FetchStatus.FAILED
+      })
   },
 })
 
@@ -82,6 +94,21 @@ export const fetchAirPollution = createAsyncThunk(
   async (coordinates: [number, number]) => {
     try {
       const response = await mapService.getAirPollution(coordinates)
+      const responseData = await response.json()
+
+      return responseData
+    } catch (e: unknown) {
+      if (e instanceof Error)
+        throw new Error(e.message)
+    }
+  }
+)
+
+export const fetchCurrentWeather = createAsyncThunk(
+  "map/fetchCurrentWeather",
+  async (coordinates: [number, number]) => {
+    try {
+      const response = await mapService.getCurrentWeather(coordinates)
       const responseData = await response.json()
 
       return responseData

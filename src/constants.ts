@@ -26,7 +26,7 @@ const pm10Breakpoints: AirQualityBreakpoint[] = [
   { cLow: 505, cHigh: 604, iLow: 401, iHigh: 500 },
 ]
 
-const AqiCategory: AqiCategoryType[] = [
+const aqiCategory: AqiCategoryType[] = [
   { min: 0, max: 50, label: "Good", color: "green" },
   { min: 51, max: 100, label: "Moderate", color: "orange" },
   { min: 101, max: 150, label: "Unhealthy for sensitive groups", color: "orange" },
@@ -34,8 +34,29 @@ const AqiCategory: AqiCategoryType[] = [
   { min: 201, max: 300, label: "Very Unhealthy", color: "purple" },
   { min: 301, max: 500, label: "Hazardous", color: "maroon" },
   { min: 501, max: 1000, label: "Very Hazardous", color: "brown" },
-];
+]
 
+const aqiLabels: Record<string, { name: string, unit: string }> = {
+  co: { name: "CO", unit: "ppm" },
+  no: { name: "NO", unit: "ppb" },
+  no2: { name: "NO₂", unit: "ppb" },
+  o3: { name: "O₃", unit: "ppb" },
+  so2: { name: "SO₂", unit: "ppb" },
+  pm2_5: { name: "PM2.5", unit: "µg/m³" },
+  pm10: { name: "PM10", unit: "µg/m³" },
+  nh3: { name: "NH₃", unit: "ppb" }
+}
+
+const weatherLabels: Record<string, { name: string, unit: string }> = {
+  temp: {name: "Temperature", unit: "°C"},
+  feels_like: {name: "Feels like", unit: "°C"},
+  temp_min: {name: "Min", unit: "°C"},
+  temp_max: {name: "Max", unit: "°C"},
+  pressure: {name: "Pressure", unit: "hPa"},
+  humidity: {name: "Humidity", unit: "%"},
+  sea_level: {name: "Sea level", unit: "hPa"},
+  grnd_level: {name: "Ground level", unit: "hPa"},
+}
 
 export default { 
   mobileBreakpoint, 
@@ -45,5 +66,7 @@ export default {
   coordinateY,
   pm25Breakpoints,
   pm10Breakpoints,
-  AqiCategory
+  aqiCategory,
+  aqiLabels,
+  weatherLabels
 }

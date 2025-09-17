@@ -21,7 +21,18 @@ function getAirPollution(coordinates: [number, number]) {
   })
 }
 
+function getCurrentWeather(coordinates: [number, number]) {
+  const relativeUrl =
+    `/data/2.5/weather?lat=${coordinates[0]}&lon=${coordinates[1]}&appid=${openWeatherMapApiKey}&units=metric`
+  const requestUrl = baseUrl + relativeUrl
+
+  return fetch(requestUrl, {
+    method: "GET",
+  })
+}
+
 export default {
   getGeocoding,
-  getAirPollution
+  getAirPollution,
+  getCurrentWeather
 }

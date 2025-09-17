@@ -3,7 +3,7 @@ import { IconButton, InputAdornment, TextField, Typography } from "@mui/material
 import { useSnackbar } from "notistack";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { useAppDispatch } from "../app/hooks";
-import { fetchAirPollution, fetchGeocoding, mapActions } from "../app/mapSlice";
+import { fetchAirPollution, fetchCurrentWeather, fetchGeocoding, mapActions } from "../app/mapSlice";
 import colors from "../styles/colors";
 import styles from "./Navbar.module.css";
 import { uiActions } from "../app/uiSlice";
@@ -41,6 +41,7 @@ function Navbar() {
           dispatch(mapActions.setCenter([data.lat, data.lon]))
           dispatch(mapActions.setMarker([data.lat, data.lon]))
           dispatch(fetchAirPollution([data.lat, data.lon]))
+          dispatch(fetchCurrentWeather([data.lat, data.lon]))
             .unwrap()
             .then(() => {
               setTimeout(() => dispatch(uiActions.setIsLoading(false)), 1000)

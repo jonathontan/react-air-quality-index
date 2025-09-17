@@ -4,16 +4,6 @@
 }
 
 .popupContent {
-  width: 300px;
-  max-width: 500px;
-  min-height: 50px;
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
   .detailsList {
     display: flex;
     flex-direction: column;
@@ -31,6 +21,18 @@
 
   .description {
     margin-left: 8px;
+  }
+
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .weather {
+    width: 33px;
+    height: 33px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
   }
 }
 
