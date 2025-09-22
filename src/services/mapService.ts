@@ -31,8 +31,30 @@ function getCurrentWeather(coordinates: [number, number]) {
   })
 }
 
+function getIp() {
+  const requestUrl = "https://api.ipify.org"
+
+  return fetch(requestUrl, {
+    method: 'GET'
+  })
+}
+
+function getIpDetails(ip: string) {
+  const newBaseUrl = "https://ipapi.co"
+  const relativeUrl = `/${ip}/json`
+  const requestUrl = newBaseUrl + relativeUrl
+
+  return fetch(requestUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
 export default {
   getGeocoding,
   getAirPollution,
-  getCurrentWeather
-}
+  getCurrentWeather,
+  getIp,
+  getIpDetails}

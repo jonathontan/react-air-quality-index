@@ -39,7 +39,7 @@ const mapSlice = createSlice({
     }
   },
   extraReducers(builder) {
-      builder
+    builder
       .addCase(fetchGeocoding.pending, (state) => {
         state.fetchStatus = FetchStatus.LOADING
       })
@@ -109,6 +109,36 @@ export const fetchCurrentWeather = createAsyncThunk(
   async (coordinates: [number, number]) => {
     try {
       const response = await mapService.getCurrentWeather(coordinates)
+      const responseData = await response.json()
+
+      return responseData
+    } catch (e: unknown) {
+      if (e instanceof Error)
+        throw new Error(e.message)
+    }
+  }
+)
+
+export const fetchIp = createAsyncThunk(
+  "map/fetchIp",
+  async () => {
+    try {
+      const response = await mapService.getIp()
+      const responseData = await response.text()
+
+      return responseData
+    } catch (e: unknown) {
+      if (e instanceof Error)
+        throw new Error(e.message)
+    }
+  }
+)
+
+export const fetchIpDetails = createAsyncThunk(
+  "map/fetchIpDetails",
+  async (ip: string) => {
+    try {
+      const response = await mapService.getIpDetails(ip)
       const responseData = await response.json()
 
       return responseData

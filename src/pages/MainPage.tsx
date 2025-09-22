@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { useMediaQuery } from "@mui/material";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { fetchAirPollution, fetchCurrentWeather, fetchIp, fetchIpDetails, mapActions } from "../app/mapSlice";
 import { uiActions } from "../app/uiSlice";
 import Map from "../components/Map";
 import constants from "../constants";
@@ -22,6 +23,30 @@ function MainPage() {
   useEffect(() => {
     dispatch(uiActions.setTabletBreakpoint(tabletBreakpoint))
   }, [tabletBreakpoint])
+
+  useEffect(() => {
+    const loadInitial = async () => {
+      try {
+        const ip = await dispatch(fetchIp()).unwrap()
+        if (!ip) return
+
+        const details = await dispatch(fetchIpDetails(ip)).unwrap()
+        if (!details) return;
+
+        const { latitude, longitude } = details
+
+        dispatch(mapActions.setCenter([latitude, longitude]))
+        dispatch(mapActions.setMarker([latitude, longitude]))
+        dispatch(fetchAirPollution([latitude, longitude]))
+        dispatch(fetchCurrentWeather([latitude, longitude]))
+      } catch (error) {
+        console.error("Failed to load IP details:", error);
+      }
+    };
+
+    loadInitial()
+  }, [])
+
 
   return (
     <div className={styles.container}>
