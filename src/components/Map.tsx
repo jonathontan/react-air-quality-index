@@ -3,7 +3,14 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/
 import L from "leaflet";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {
+  fetchAirPollution,
+  fetchCurrentWeather,
+  fetchIp,
+  fetchIpDetails,
+  mapActions
+} from "../app/mapSlice";
 import constants from "../constants";
 import { AirQualityBreakpoint } from "../interfaces/map";
 import colors from "../styles/colors";
@@ -28,12 +35,37 @@ function UpdateMap() {
 }
 
 function Map() {
+  const dispatch = useAppDispatch()
   const marker = useAppSelector(state => state.map.marker)
   const markerRef = useRef<L.Marker>(null)
   const geocoding = useAppSelector(state => state.map.geocoding)
   const airPollution = useAppSelector(state => state.map.airPollution)
   const currentWeather = useAppSelector(state => state.map.currentWeather)
   const [expanded, setExpanded] = useState<string | false>("aqi")
+  const [initialCity, setInitialCity] = useState<string>("")
+
+  useEffect(() => {
+    const loadInitial = async () => {
+      try {
+        const ip = await dispatch(fetchIp()).unwrap()
+        if (!ip) return
+
+        const details = await dispatch(fetchIpDetails(ip)).unwrap()
+        if (!details) return
+
+        const { latitude, longitude, city } = details
+        setInitialCity(city)
+        dispatch(mapActions.setCenter([latitude, longitude]))
+        dispatch(mapActions.setMarker([latitude, longitude]))
+        dispatch(fetchAirPollution([latitude, longitude]))
+        dispatch(fetchCurrentWeather([latitude, longitude]))
+      } catch (error) {
+        console.error("Failed to load IP details:", error)
+      }
+    }
+
+    loadInitial()
+  }, [])
 
   useEffect(() => {
     if (markerRef.current)
@@ -73,7 +105,7 @@ function Map() {
 
     return (
       <div className={styles.popupContent}>
-        <h2>{city}</h2>
+        <h2>{city || initialCity}</h2>
         <div className={styles.accordion}>
           <Accordion
             expanded={expanded === "aqi"}
