@@ -212,7 +212,7 @@ function Map() {
                   return (
                     <div key={index} className={styles.detailItem}>
                       <dt className={styles.title}>{label.name ?? ""}</dt>
-                      <dd className={styles.description}>{v} {label.unit ?? ""}</dd>
+                      <dd className={styles.description}>{v.toFixed()} {label.unit ?? ""}</dd>
                     </div>
                   )
                 })}
